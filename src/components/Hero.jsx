@@ -1,5 +1,6 @@
 import React from 'react';
 import Spline from '@splinetool/react-spline';
+import WavingFlag from './WavingFlag';
 
 export default function Hero() {
   return (
@@ -21,6 +22,12 @@ export default function Hero() {
             <a href="#insights" className="inline-flex items-center justify-center rounded-lg bg-neutral-800 px-4 py-2 text-sm font-medium border border-neutral-700 hover:bg-neutral-700 transition-colors">Sector Insights</a>
           </div>
           <p className="mt-3 text-xs text-neutral-400">Tip: Click and drag the red globe to spin it.</p>
+        </div>
+
+        {/* Waving Indian Flag floating in the air */}
+        <div className="hidden md:block pointer-events-none absolute right-6 top-6 animate-[float_6s_ease-in-out_infinite]">
+          <style>{`@keyframes float { 0%,100%{ transform: translateY(0) rotate(-2deg);} 50%{ transform: translateY(-10px) rotate(2deg);} }`}</style>
+          <WavingFlag className="w-[280px]" />
         </div>
       </div>
     </section>
