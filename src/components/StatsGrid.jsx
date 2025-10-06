@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import Reveal from './Reveal';
 
 const stats = [
   {
@@ -43,25 +45,52 @@ const stats = [
   }
 ];
 
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
+
 export default function StatsGrid() {
   return (
     <div>
-      <div className="mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold">Key Statistics</h2>
-        <p className="mt-2 text-neutral-400 text-sm">Snapshot figures to give a quick overview of India’s scale and momentum. Values are rounded for readability.</p>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <Reveal>
+        <div className="mb-6">
+          <h2 className="text-2xl sm:text-3xl font-semibold">Key Statistics</h2>
+          <p className="mt-2 text-neutral-400 text-sm">Snapshot figures to give a quick overview of India’s scale and momentum. Values are rounded for readability.</p>
+        </div>
+      </Reveal>
+
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+      >
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-neutral-800 bg-neutral-900/40 p-5">
+          <motion.div key={s.label} variants={item} className="rounded-xl border border-neutral-800 bg-neutral-900/40 p-5">
             <div className="text-neutral-400 text-xs uppercase tracking-wide">{s.label}</div>
             <div className="mt-2 text-2xl font-semibold">{s.value}</div>
             <div className="mt-1 text-xs text-neutral-500">{s.note}</div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-      <div className="mt-4 text-xs text-neutral-500">
-        Sources: World Bank, IMF, UN datasets, Government of India publications; compiled 2024.
-      </div>
+      </motion.div>
+
+      <Reveal delay={0.1}>
+        <div className="mt-4 text-xs text-neutral-500">
+          Sources: World Bank, IMF, UN datasets, Government of India publications; compiled 2024.
+        </div>
+      </Reveal>
     </div>
   );
 }

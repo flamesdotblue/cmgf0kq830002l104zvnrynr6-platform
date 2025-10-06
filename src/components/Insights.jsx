@@ -1,5 +1,7 @@
 import React from 'react';
 import { Leaf, Book, Cpu, Landmark } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Reveal from './Reveal';
 
 const cards = [
   {
@@ -44,16 +46,37 @@ const cards = [
   }
 ];
 
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
+
 export default function Insights() {
   return (
     <div>
-      <div className="mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold">Sector Insights</h2>
-        <p className="mt-2 text-neutral-400 text-sm">A quick look at themes shaping India’s near-term trajectory across growth, technology, human capital, and sustainability.</p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <Reveal>
+        <div className="mb-6">
+          <h2 className="text-2xl sm:text-3xl font-semibold">Sector Insights</h2>
+          <p className="mt-2 text-neutral-400 text-sm">A quick look at themes shaping India’s near-term trajectory across growth, technology, human capital, and sustainability.</p>
+        </div>
+      </Reveal>
+
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-5"
+      >
         {cards.map(({ icon: Icon, title, points, color }) => (
-          <div key={title} className="relative rounded-xl border border-neutral-800 bg-neutral-900/40 p-5 overflow-hidden">
+          <motion.div key={title} variants={item} className="relative rounded-xl border border-neutral-800 bg-neutral-900/40 p-5 overflow-hidden">
             <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${color}`} />
             <div className="relative z-10">
               <div className="flex items-center gap-3">
@@ -68,9 +91,9 @@ export default function Insights() {
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

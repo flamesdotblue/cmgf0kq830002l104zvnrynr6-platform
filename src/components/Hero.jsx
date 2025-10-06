@@ -1,5 +1,6 @@
 import React from 'react';
 import Spline from '@splinetool/react-spline';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
@@ -9,7 +10,12 @@ export default function Hero() {
       </div>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-neutral-950/20 to-neutral-950/80" />
       <div className="relative z-10 h-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center">
-        <div className="pointer-events-auto max-w-xl bg-neutral-900/50 backdrop-blur rounded-xl p-6 sm:p-8 border border-neutral-800">
+        <motion.div
+          className="pointer-events-auto max-w-xl bg-neutral-900/50 backdrop-blur rounded-xl p-6 sm:p-8 border border-neutral-800"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
           <h1 className="text-3xl sm:text-5xl font-semibold leading-tight">
             India: A Billion Stories. One Future.
           </h1>
@@ -21,7 +27,7 @@ export default function Hero() {
             <a href="#insights" className="inline-flex items-center justify-center rounded-lg bg-neutral-800 px-4 py-2 text-sm font-medium border border-neutral-700 hover:bg-neutral-700 transition-colors">Sector Insights</a>
           </div>
           <p className="mt-3 text-xs text-neutral-400">Tip: Click and drag the red globe to spin it.</p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
