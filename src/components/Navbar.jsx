@@ -13,6 +13,7 @@ export default function Navbar() {
           <a href="#stats" className="hover:text-white inline-flex items-center gap-1">
             <BarChart className="h-4 w-4" /> Stats
           </a>
+          <a href="#symbols" className="hover:text-white">Symbols</a>
           <a href="#insights" className="hover:text-white">Insights</a>
           <a href="#hero" className="hover:text-white">Explore</a>
         </div>

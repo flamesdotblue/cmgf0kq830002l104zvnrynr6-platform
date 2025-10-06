@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StatsGrid from './components/StatsGrid';
+import NationalSymbols from './components/NationalSymbols';
 import Insights from './components/Insights';
 
 export default function App() {
@@ -12,6 +13,9 @@ export default function App() {
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <section id="stats" className="py-16">
           <StatsGrid />
+        </section>
+        <section id="symbols" className="py-16">
+          <NationalSymbols />
         </section>
         <section id="insights" className="py-16">
           <Insights />
